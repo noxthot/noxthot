@@ -1,0 +1,134 @@
+doctype html
+html(lang='en')
+
+    head
+
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        meta(name='description', content='')
+        meta(name='author', content='')
+
+        title Gregor Ehrensperger
+
+        link(rel='icon', type='image/x-icon', href='assets/favicon.ico')
+
+        // Font Awesome icons (free version)
+        script(src='https://use.fontawesome.com/releases/v5.15.3/js/all.js', crossorigin='anonymous')
+
+        // Google fonts
+        link(href='https://fonts.googleapis.com/css?family=Varela+Round', rel='stylesheet')
+        link(href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i', rel='stylesheet')
+
+        // Core theme CSS (includes Bootstrap)
+        link(href='css/styles.css', rel='stylesheet')
+
+    body#page-top
+
+        // Navigation
+        nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
+            .container.px-4.px-lg-5
+                a.navbar-brand(href='#page-top') SCROLL TO TOP
+                button.navbar-toggler.navbar-toggler-right(type='button', data-bs-toggle='collapse', data-bs-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
+                    | Menu
+                    i.fas.fa-bars
+                #navbarResponsive.collapse.navbar-collapse
+                    ul.navbar-nav.ms-auto
+                        li.nav-item
+                            a.nav-link(href='#about') About
+                        li.nav-item
+                            a.nav-link(href='#contact') Contact
+
+        // Masthead
+        header.masthead
+            .container.px-4.px-lg-5.d-flex.h-100.align-items-center.justify-content-center
+                .d-flex.justify-content-center
+                    .text-center
+                        h1.mx-auto.my-0.text-uppercase AI &middot; DEV &middot; MATH
+                        h2.text-white-50.mx-auto.mt-2.mb-5 Gregor Ehrensperger
+                        a.btn.btn-primary(href='#about') About Me
+        // Projects
+        section#about.projects-section.bg-light
+            .container.px-4.px-lg-5
+                // Featured Project Row
+                .row.gx-0.mb-4.mb-lg-5.align-items-center
+                    .col-xl-8.col-lg-7
+                        img.img-fluid.mb-3.mb-lg-0(src='assets/img/greh3.jpg', alt='...')
+                    .col-xl-4.col-lg-5
+                        .featured-text.text-center.text-lg-left
+                            h4 About me
+                            p.text-black-50.mb-0
+                                | Hej there. Thanks for visiting! My name is Gregor and I was born in the beautiful Tyrolian Alps in 1986. I am a software developer with a strong background in mathematics and besides crafting software my main interests are mathematical modelling, data science and machine learning.
+                // Project One Row
+                .row.gx-0.mb-5.mb-lg-0.justify-content-center
+                    .col-lg-6
+                        img.img-fluid(src='assets/img/greh1gs.jpg', alt='...')
+                    .col-lg-6
+                        .bg-black.text-center.h-100.project
+                            .d-flex.h-100
+                                .project-text.w-100.my-auto.text-center.text-lg-left
+                                    h4.text-white AI
+                                    p.mb-0.text-white-50
+                                        | In 2011 I attended the very first edition of the famous MOOC Artificial Intelligence by Sebastian Thrun and Peter Norvig and was glad to rank among the top 1000 students (160.000 signed up for the course). I was immediately captivated by AI related topics and in the following years I took every opportunity to upskill in this field. I attended related conferences, took more university and online courses and worked on Data Science / AI projects professionally. Since 2021 I am pursuing a PhD in Data Science at the University of Innsbruck.
+                                    hr.d-none.d-lg-block.mb-0.ms-0
+                // Project Two Row
+                .row.gx-0.justify-content-center
+                    .col-lg-6
+                        img.img-fluid(src='assets/img/greh5.jpg', alt='...')
+                    .col-lg-6.order-lg-first
+                        .bg-black.text-center.h-100.project
+                            .d-flex.h-100
+                                .project-text.w-100.my-auto.text-center.text-lg-right
+                                    h4.text-white DEV
+                                    p.mb-0.text-white-50
+                                        | The development of stable software packages is quite an art. I love to craft software, tweak algorithms, improve performance and stability. I am a DevOps evangelist and very keen about enabling developers to unlock their full potential. I hold a Bachelor degree in Computer Science and worked as a Senior Software Engineer for several years.
+                                    hr.d-none.d-lg-block.mb-0.me-0
+                // Project Three Row
+                .row.gx-0.mb-5.mb-lg-0.justify-content-center
+                    .col-lg-6
+                        img.img-fluid(src='assets/img/greh4.jpg', alt='...')
+                    .col-lg-6
+                        .bg-black.text-center.h-100.project
+                            .d-flex.h-100
+                                .project-text.w-100.my-auto.text-center.text-lg-left
+                                    h4.text-white MATH
+                                    p.mb-0.text-white-50
+                                        | "Mathematics is the language in which God has written the universe" (Galileo Galilei). This might be exaggerated but profound knowledge of mathematics is quite helpful especially when working on AI and Data Science related topics. As a graduate in Technical Mathematics I always strive to understand the theory and limits of the applied methods.
+                                    hr.d-none.d-lg-block.mb-0.ms-0
+
+        // Contact
+        section#contact.contact-section.bg-black
+            .container.px-4.px-lg-5
+                .row.gx-4.gx-lg-5
+                    .col-md-6.mb-3.mb-md-0
+                        .card.py-4.h-100
+                            .card-body.text-center
+                                i.fas.fa-map-marked-alt.text-primary.mb-2
+                                h4.text-uppercase.m-0 Address
+                                hr.my-4.mx-auto
+                                .small.text-black-50 6094 Axams, Austria
+                    .col-md-6.mb-3.mb-md-0
+                        .card.py-4.h-100
+                            .card-body.text-center
+                                i.fas.fa-envelope.text-primary.mb-2
+                                h4.text-uppercase.m-0 Email
+                                hr.my-4.mx-auto
+                                .small.text-black-50
+                                    a(href='mailto:g@ehrensperger.dev?subject=Hej you!&body=Reaching out via ehrensperger.dev') g@ehrensperger.dev
+                .social.d-flex.justify-content-center
+                    a.mx-2(href='https://www.linkedin.com/in/gregor-ehrensperger/')
+                        i.fab.fa-linkedin
+                    a.mx-2(href='https://github.com/noxthot')
+                        i.fab.fa-github
+                    a.mx-2(href='https://www.facebook.com/gregor.ehrensperger/')
+                        i.fab.fa-facebook
+
+        // Footer
+        footer.footer.bg-black.small.text-center.text-white-50
+            .container.px-4.px-lg-5
+                | Copyright &copy; Gregor Ehrensperger 2021
+
+        // Bootstrap core JS
+        script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js')
+
+        // Core theme JS
+        script(src='js/scripts.js')
