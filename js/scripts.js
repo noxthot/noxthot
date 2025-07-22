@@ -1,6 +1,6 @@
 /*!
 * Start Bootstrap - Gregor Ehrensperger v1.0.0 (https://github.com/noxthot/noxthot)
-* Copyright 2013-2022 Start Bootstrap
+* Copyright 2013-2025 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/ge-grayscale/blob/master/LICENSE)
 */
 //
