@@ -5,9 +5,9 @@
 #### Workshop and course materials
 Here are materials from some workshops and courses I have contributed to:
 
-- [Performance Topics, Parallel and Remote Computing in Julia](https://kandolfp.github.io/ws23_ulg_vu_ama_performance/) - Master of Data Science, Winter semester 2023
+- [Performance Topics, Parallel and Remote Computing in Julia](https://kandolfp.github.io/ws23_ulg_vu_ama_performance/) - Master of Data Science, Winter term 2023
 
-- [Introductionary Data Science with Julia](https://noxthot.github.io/ws22_ulg_ds_julia/) - Master of Data Science, Winter semester 2022
+- [Introductionary Data Science with Julia](https://noxthot.github.io/ws22_ulg_ds_julia/) - Master of Data Science, Winter term 2022
 
 - [Scientific Coding with Julia](https://noxthot.github.io/ss22_julia_workshop/) - Doctoral College Computational Interdisciplinary Modelling, Summer School 2022
 
@@ -21,6 +21,8 @@ Here are materials from some workshops and courses I have contributed to:
 - [Identifying Lightning Processes in ERA5 Soundings with Deep Learning](https://doi.org/10.5194/gmd-18-1141-2025) - 2025 - [Code](https://github.com/noxthot/xai_lightningprocesses)
 
 - [Accounting for seasonality in the metastatistical extreme value distribution](https://doi.org/10.1016/j.wace.2023.100601) - 2023 - [Code](https://github.com/Falke96/extreme_precipitation_austria)
+
+- [Evaluating CNNs on the Gestalt Principle of Closure](https://doi.org/10.1007/978-3-030-30487-4_23) - 2019
 
 - [Fast algorithms for morphological operations using run-length encoded binary images](https://doi.org/10.48550/arXiv.1504.01052) - 2015[^1] - [Code](https://github.com/noxthot/erosion_dilation_rle)
 
