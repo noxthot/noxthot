@@ -16,8 +16,7 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "esbenp.prettier-vscode",
-                "syler.sass-indented"
+				"github.copilot"
             ],
             "settings": {
                 "editor.formatOnSave": false,
