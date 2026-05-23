@@ -3,3 +3,4 @@ node_modules
 README_files
 
 README.html
+dist/js/scripts.js.tmp.*
