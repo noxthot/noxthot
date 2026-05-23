@@ -4,16 +4,28 @@ const upath = require('upath');
 const pug = require('pug');
 const sh = require('shelljs');
 const prettier = require('prettier');
+const { getPosts } = require('./render-blog');
+
+const LATEST_POSTS_COUNT = 3;
 
 module.exports = function renderPug(filePath) {
     const destPath = filePath.replace(/src\/pug\//, 'dist/').replace(/\.pug$/, '.html');
     const srcPath = upath.resolve(upath.dirname(__filename), '../src');
 
+    const latestPosts = getPosts().slice(0, LATEST_POSTS_COUNT).map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        dateIso: p.dateIso,
+        dateFormatted: p.dateFormatted,
+        excerpt: p.excerpt
+    }));
+
     console.log(`### INFO: Rendering ${filePath} to ${destPath}`);
     const html = pug.renderFile(filePath, {
         doctype: 'html',
         filename: filePath,
-        basedir: srcPath
+        basedir: srcPath,
+        latestPosts
     });
 
     const destPathDirname = upath.dirname(destPath);

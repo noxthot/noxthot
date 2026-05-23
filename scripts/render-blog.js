@@ -22,7 +22,22 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
     year: 'numeric'
 });
 
-module.exports = function renderBlog() {
+function getPosts() {
+    if (!sh.test('-d', blogSrc)) {
+        return [];
+    }
+
+    const mdFiles = sh
+        .find(blogSrc)
+        .filter((p) => p.match(/\.md$/));
+
+    return mdFiles
+        .map((filePath) => _parsePost(filePath))
+        .filter(Boolean)
+        .sort((a, b) => b.date - a.date);
+}
+
+function renderBlog() {
     if (!sh.test('-d', blogSrc)) {
         console.log(`### INFO: No blog source directory at ${blogSrc} — skipping blog build`);
         return;
@@ -32,14 +47,7 @@ module.exports = function renderBlog() {
         sh.mkdir('-p', blogDest);
     }
 
-    const mdFiles = sh
-        .find(blogSrc)
-        .filter((p) => p.match(/\.md$/));
-
-    const posts = mdFiles
-        .map((filePath) => _parsePost(filePath))
-        .filter(Boolean)
-        .sort((a, b) => b.date - a.date);
+    const posts = getPosts();
 
     const slugs = new Set();
     for (const post of posts) {
@@ -83,7 +91,10 @@ module.exports = function renderBlog() {
     const indexDest = upath.join(blogDest, 'index.html');
     fs.writeFileSync(indexDest, _prettify(indexHtml));
     console.log(`### INFO: Rendered blog index → ${indexDest} (${posts.length} post${posts.length === 1 ? '' : 's'})`);
-};
+}
+
+module.exports = renderBlog;
+module.exports.getPosts = getPosts;
 
 function _parsePost(filePath) {
     const raw = fs.readFileSync(filePath, 'utf8');

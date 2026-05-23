@@ -11,6 +11,27 @@ block content
                     h1.mx-auto.my-0.mt-5.text-uppercase AI &middot; DEV &middot; MATH
                     h4.text-white-50.mx-auto.mt-2.mb-5 Navigating the realms where algorithms blaze, seeking knowledge in a data-driven maze
                     a.btn.btn-primary(href='#about') About Me
+
+    // Latest blog posts
+    section#latest-posts.blog-section.bg-light
+        .container.px-4.px-lg-5
+            .row.justify-content-center
+                .col-lg-8
+                    h2.blog-section__title.text-uppercase.mb-5 Latest blog posts
+                    if latestPosts && latestPosts.length
+                        ul.blog-index.list-unstyled
+                            each post in latestPosts
+                                li.blog-index__item
+                                    a.blog-index__link(href=`blog/${post.slug}.html`)
+                                        h3.blog-index__post-title= post.title
+                                    time.blog-index__date(datetime=post.dateIso)= post.dateFormatted
+                                    if post.excerpt
+                                        p.blog-index__excerpt.text-black-50= post.excerpt
+                        .text-center.mt-4
+                            a.btn.btn-primary(href='blog/') View all posts
+                    else
+                        p.text-black-50 No posts yet.
+
     // Projects
     section#about.projects-section.bg-light
         .container.px-4.px-lg-5
