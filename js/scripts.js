@@ -1,6 +1,6 @@
 /*!
 * Start Bootstrap - Gregor Ehrensperger v1.0.0 (https://github.com/noxthot/noxthot)
-* Copyright 2013-2025 Start Bootstrap
+* Copyright 2013-2026 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/ge-grayscale/blob/master/LICENSE)
 */
 //
@@ -15,7 +15,8 @@ window.addEventListener('DOMContentLoaded', event => {
         if (!navbarCollapsible) {
             return;
         }
-        if (window.scrollY === 0) {
+        const hasMasthead = !!document.body.querySelector('.masthead');
+        if (window.scrollY === 0 && hasMasthead) {
             navbarCollapsible.classList.remove('navbar-shrink')
         } else {
             navbarCollapsible.classList.add('navbar-shrink')
