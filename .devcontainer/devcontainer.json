@@ -16,7 +16,8 @@
     "customizations": {
         "vscode": {
             "extensions": [
-				"github.copilot"
+				"github.copilot",
+                "github.copilot-chat"
             ],
             "settings": {
                 "editor.formatOnSave": false,
