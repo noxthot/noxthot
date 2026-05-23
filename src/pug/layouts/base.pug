@@ -1,5 +1,6 @@
 - var baseUrl = (typeof baseUrl !== 'undefined') ? baseUrl : ''
 - var pageTitle = (typeof pageTitle !== 'undefined') ? pageTitle : 'Gregor Ehrensperger'
+- var brand = (typeof brand !== 'undefined') ? brand : 'SCROLL TO TOP'
 
 doctype html
 html(lang='en')
@@ -32,7 +33,7 @@ html(lang='en')
         // Navigation
         nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
             .container.px-4.px-lg-5
-                a.navbar-brand(href=`${baseUrl}#page-top`) SCROLL TO TOP
+                a.navbar-brand(href=`${baseUrl}#page-top`)= brand
                 button.navbar-toggler.navbar-toggler-right(type='button', data-bs-toggle='collapse', data-bs-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
                     | Menu
                     i.fas.fa-bars

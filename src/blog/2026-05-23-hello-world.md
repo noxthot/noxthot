@@ -10,3 +10,6 @@ This space is there as my personal memory for things that I either happen to loo
 There is no plan for a regular schedule or focus on specific topics.
 
 To keep it short: This is a blog which is mostly for myself, but if anyone else finds something useful, it is a nice bonus.
+
+Best,
+Gregor

@@ -15,7 +15,8 @@ window.addEventListener('DOMContentLoaded', event => {
         if (!navbarCollapsible) {
             return;
         }
-        if (window.scrollY === 0) {
+        const hasMasthead = !!document.body.querySelector('.masthead');
+        if (window.scrollY === 0 && hasMasthead) {
             navbarCollapsible.classList.remove('navbar-shrink')
         } else {
             navbarCollapsible.classList.add('navbar-shrink')

@@ -54,6 +54,7 @@ module.exports = function renderBlog() {
             filename: postTemplate,
             basedir: upath.join(srcRoot, 'pug'),
             baseUrl: '../',
+            brand: '← HOME',
             pageTitle: `${post.title} · Gregor Ehrensperger`,
             title: post.title,
             dateIso: post.dateIso,
@@ -69,6 +70,7 @@ module.exports = function renderBlog() {
         filename: indexTemplate,
         basedir: upath.join(srcRoot, 'pug'),
         baseUrl: '../',
+        brand: '← HOME',
         pageTitle: 'Blog · Gregor Ehrensperger',
         posts: posts.map((p) => ({
             slug: p.slug,
