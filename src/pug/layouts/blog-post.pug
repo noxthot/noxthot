@@ -1,0 +1,14 @@
+extends base.pug
+
+block content
+
+    section.blog-section.bg-light
+        .container.px-4.px-lg-5
+            .row.justify-content-center
+                .col-lg-8
+                    a.blog-post__back(href='./') &larr; Back to all posts
+                    article.blog-post
+                        header.blog-post__header.mb-4
+                            h1.blog-post__title= title
+                            time.blog-post__date(datetime=dateIso)= dateFormatted
+                        .blog-post__body!= contentHtml

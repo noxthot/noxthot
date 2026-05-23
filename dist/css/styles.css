@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /*!
 * Start Bootstrap - Gregor Ehrensperger v1.0.0 (https://github.com/noxthot/noxthot)
-* Copyright 2013-2025 Start Bootstrap
+* Copyright 2013-2026 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/ge-grayscale/blob/master/LICENSE)
 */
 /*!
@@ -7581,10 +7581,6 @@ textarea.form-control-lg {
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
-.text-white-80 {
-  color: rgba(255, 255, 255, 0.8) !important;
-}
-
 .text-reset {
   color: inherit !important;
 }
@@ -11174,7 +11170,7 @@ body {
   }
   .masthead h2, .masthead .h2 {
     max-width: 30rem;
-    font-size: 1.9rem;
+    font-size: 1.25rem;
   }
 }
 
@@ -11267,6 +11263,117 @@ body {
 }
 .contact-section .social a:active {
   color: #fff;
+}
+
+.blog-section {
+  padding: 8rem 0 6rem;
+}
+.blog-section__title {
+  font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  letter-spacing: 0.4rem;
+  color: #212529;
+}
+
+.blog-index {
+  margin: 0;
+}
+.blog-index__item {
+  padding: 2rem 0;
+  border-top: 1px solid #dee2e6;
+}
+.blog-index__item:last-child {
+  border-bottom: 1px solid #dee2e6;
+}
+.blog-index__link {
+  color: #212529;
+  text-decoration: none;
+}
+.blog-index__link:hover {
+  color: #64a19d;
+}
+.blog-index__post-title {
+  margin-bottom: 0.25rem;
+}
+.blog-index__date {
+  display: block;
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-bottom: 0.75rem;
+}
+.blog-index__excerpt {
+  margin-bottom: 0;
+}
+
+.blog-post__back {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #6c757d;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.blog-post__back:hover {
+  color: #64a19d;
+}
+.blog-post__title {
+  font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  color: #212529;
+}
+.blog-post__date {
+  display: block;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+.blog-post__body {
+  color: #343a40;
+  line-height: 1.7;
+}
+.blog-post__body h2, .blog-post__body .h2, .blog-post__body h3, .blog-post__body .h3, .blog-post__body h4, .blog-post__body .h4 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: #212529;
+}
+.blog-post__body p {
+  margin-bottom: 1.25rem;
+}
+.blog-post__body a {
+  color: #64a19d;
+}
+.blog-post__body a:hover {
+  color: #4f837f;
+}
+.blog-post__body ul, .blog-post__body ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+.blog-post__body code {
+  background-color: #f8f9fa;
+  color: #212529;
+  padding: 0.15rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+.blog-post__body pre {
+  background-color: #212529;
+  color: #f8f9fa;
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+.blog-post__body pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+.blog-post__body blockquote {
+  border-left: 0.25rem solid #64a19d;
+  padding-left: 1rem;
+  color: #495057;
+  margin: 1.5rem 0;
+}
+.blog-post__body img {
+  max-width: 100%;
+  height: auto;
 }
 
 .footer {

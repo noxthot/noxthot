@@ -1,0 +1,20 @@
+extends base.pug
+
+block content
+
+    section.blog-section.bg-light
+        .container.px-4.px-lg-5
+            .row.justify-content-center
+                .col-lg-8
+                    h1.blog-section__title.text-uppercase.mb-5 Blog
+                    if posts && posts.length
+                        ul.blog-index.list-unstyled
+                            each post in posts
+                                li.blog-index__item
+                                    a.blog-index__link(href=`${post.slug}.html`)
+                                        h3.blog-index__post-title= post.title
+                                    time.blog-index__date(datetime=post.dateIso)= post.dateFormatted
+                                    if post.excerpt
+                                        p.blog-index__excerpt.text-black-50= post.excerpt
+                    else
+                        p.text-black-50 No posts yet.

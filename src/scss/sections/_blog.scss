@@ -1,0 +1,138 @@
+//
+// Blog
+//
+
+.blog-section {
+    padding: 8rem 0 6rem;
+
+    &__title {
+        font-family: $font-family-special;
+        letter-spacing: 0.4rem;
+        color: $gray-900;
+    }
+}
+
+.blog-index {
+    margin: 0;
+
+    &__item {
+        padding: 2rem 0;
+        border-top: 1px solid $gray-300;
+
+        &:last-child {
+            border-bottom: 1px solid $gray-300;
+        }
+    }
+
+    &__link {
+        color: $gray-900;
+        text-decoration: none;
+
+        &:hover {
+            color: $primary;
+        }
+    }
+
+    &__post-title {
+        margin-bottom: 0.25rem;
+    }
+
+    &__date {
+        display: block;
+        font-size: 0.85rem;
+        color: $gray-600;
+        margin-bottom: 0.75rem;
+    }
+
+    &__excerpt {
+        margin-bottom: 0;
+    }
+}
+
+.blog-post {
+    &__back {
+        display: inline-block;
+        margin-bottom: 2rem;
+        color: $gray-600;
+        text-decoration: none;
+        font-size: 0.9rem;
+
+        &:hover {
+            color: $primary;
+        }
+    }
+
+    &__title {
+        font-family: $font-family-special;
+        color: $gray-900;
+    }
+
+    &__date {
+        display: block;
+        font-size: 0.85rem;
+        color: $gray-600;
+    }
+
+    &__body {
+        color: $gray-800;
+        line-height: 1.7;
+
+        h2, h3, h4 {
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: $gray-900;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+        }
+
+        a {
+            color: $primary;
+
+            &:hover {
+                color: darken($primary, 10%);
+            }
+        }
+
+        ul, ol {
+            margin-bottom: 1.25rem;
+            padding-left: 1.5rem;
+        }
+
+        code {
+            background-color: $gray-100;
+            color: $gray-900;
+            padding: 0.15rem 0.35rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: $gray-900;
+            color: $gray-100;
+            padding: 1rem 1.25rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+
+            code {
+                background-color: transparent;
+                color: inherit;
+                padding: 0;
+            }
+        }
+
+        blockquote {
+            border-left: 0.25rem solid $primary;
+            padding-left: 1rem;
+            color: $gray-700;
+            margin: 1.5rem 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}

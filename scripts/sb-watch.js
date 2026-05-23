@@ -4,6 +4,7 @@ const _ = require('lodash');
 const chokidar = require('chokidar');
 const upath = require('upath');
 const renderAssets = require('./render-assets');
+const renderBlog = require('./render-blog');
 const renderPug = require('./render-pug');
 const renderScripts = require('./render-scripts');
 const renderSCSS = require('./render-scss');
@@ -41,7 +42,14 @@ function _processFile(filePath, watchEvent) {
 
     console.log(`### INFO: File event: ${watchEvent}: ${filePath}`);
 
+    if (filePath.match(/src\/blog\//) && filePath.match(/\.md$/)) {
+        return renderBlog();
+    }
+
     if (filePath.match(/\.pug$/)) {
+        if (filePath.match(/\/pug\/layouts\/blog/)) {
+            return renderBlog();
+        }
         return _handlePug(filePath, watchEvent);
     }
 
@@ -65,7 +73,8 @@ function _processFile(filePath, watchEvent) {
 function _handlePug(filePath, watchEvent) {
     if (watchEvent === 'change') {
         if (filePath.match(/includes/) || filePath.match(/mixins/) || filePath.match(/\/pug\/layouts\//)) {
-            return _renderAllPug();
+            _renderAllPug();
+            return renderBlog();
         }
         return renderPug(filePath);
     }
