@@ -1,0 +1,29 @@
+{
+    "name": "noxthot website",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+    "postCreateCommand": "npm install",
+    "forwardPorts": [3000, 3001],
+    "portsAttributes": {
+        "3000": {
+            "label": "Site (browser-sync)",
+            "onAutoForward": "openBrowser"
+        },
+        "3001": {
+            "label": "browser-sync UI",
+            "onAutoForward": "silent"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "esbenp.prettier-vscode",
+                "syler.sass-indented"
+            ],
+            "settings": {
+                "editor.formatOnSave": false,
+                "files.eol": "\n"
+            }
+        }
+    },
+    "remoteUser": "node"
+}
