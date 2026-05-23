@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Getting WifiOnICE to work on Ubuntu · Gregor Ehrensperger</title>
+        <title>Getting WifiOnICE (wifi on trains of Deutsche Bahn) to work on Ubuntu · Gregor Ehrensperger</title>
         <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -40,7 +40,7 @@
                         <a class="blog-post__back" href="./">&larr; Back to all posts</a>
                         <article class="blog-post">
                             <header class="blog-post__header mb-4">
-                                <h1 class="blog-post__title">Getting WifiOnICE to work on Ubuntu</h1>
+                                <h1 class="blog-post__title">Getting WifiOnICE (wifi on trains of Deutsche Bahn) to work on Ubuntu</h1>
                                 <time class="blog-post__date" datetime="2026-05-23">23 May 2026</time>
                             </header>
                             <div class="blog-post__body">
@@ -49,22 +49,18 @@
                                     <a href="./hello-world.html">hello world post</a>
                                     , one of the things I keep looking up is how to get the wifi on German ICE trains to work under Ubuntu.
                                 </p>
-                                <p>Actually I then always find that it is no Ubuntu-specific problem, but a problem arising when an application uses an IP range that collides with the one used by the train’s wifi. And usually, the culprit is Docker, tailscale, or both.</p>
-                                <p>So it is actually not an Ubuntu problem, but a problem arising when an application uses an IP range that collides with the one used by the train’s wifi.</p>
+                                <p>Actually, it is not an Ubuntu-specific problem, but rather a problem that arises when an application on your machine uses an IP range that collides with the one used by the train’s wifi. In my case, the culprit is usually Docker, Tailscale, or both.</p>
                                 <h2>The symptom</h2>
                                 <p>
                                     Connected to
                                     <strong>WifiOnICE</strong>
-                                    , but the
-                                    <a href="./landing-page.html">landing page</a>
-                                    does not load.
+                                    , but the landing page does not load.
                                 </p>
                                 <h2>Identifying the cause</h2>
-                                <h2>The cause</h2>
                                 <p>
-                                    Once connected to the
+                                    Once connected to
                                     <strong>WifiOnICE</strong>
-                                    , the following command (hopefully) reveals the culprit:
+                                    , the following commands (hopefully) reveal the culprit:
                                 </p>
                                 <pre><code class="language-bash">resolvectl query login.wifionice.de
 </code></pre>

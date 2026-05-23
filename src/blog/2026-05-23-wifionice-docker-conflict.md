@@ -1,25 +1,22 @@
 ---
-title: "Getting WifiOnICE to work on Ubuntu"
+title: "Getting WifiOnICE (wifi on trains of Deutsche Bahn) to work on Ubuntu"
 date: 2026-05-23T14:00:00
-excerpt: "If your Deutsche Bahn ICE wifi is not loading the WifiOnICE connection page, the culprit is most likely an IP range collision;"
+excerpt: "If your Deutsche Bahn ICE wifi is not loading the WifiOnICE connection page, the culprit is most likely an IP range collision."
 ---
 
 As mentioned in the [hello world post](./hello-world.html), one of the things I keep looking up is how to get the wifi on German ICE trains to work under Ubuntu.
 
-Actually I then always find that it is no Ubuntu-specific problem, but a problem arising when an application uses an IP range that collides with the one used by the train's wifi.
-And usually, the culprit is Docker, tailscale, or both.
-
-So it is actually not an Ubuntu problem, but a problem arising when an application uses an IP range that collides with the one used by the train's wifi.
+Actually, it is not an Ubuntu-specific problem, but rather a problem that arises when an application on your machine uses an IP range that collides with the one used by the train's wifi.
+In my case, the culprit is usually Docker, Tailscale, or both.
 
 ## The symptom
 
-Connected to **WifiOnICE**, but the [landing page](./landing-page.html) does not load.
+Connected to **WifiOnICE**, but the landing page does not load.
 
 ## Identifying the cause
 
-## The cause
+Once connected to **WifiOnICE**, the following commands (hopefully) reveal the culprit:
 
-Once connected to the **WifiOnICE**, the following command (hopefully) reveals the culprit:
 ```bash
 resolvectl query login.wifionice.de
 ```
