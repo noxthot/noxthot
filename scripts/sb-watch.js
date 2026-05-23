@@ -43,7 +43,9 @@ function _processFile(filePath, watchEvent) {
     console.log(`### INFO: File event: ${watchEvent}: ${filePath}`);
 
     if (filePath.match(/src\/blog\//) && filePath.match(/\.md$/)) {
-        return renderBlog();
+        renderBlog();
+        _renderAllPug();
+        return;
     }
 
     if (filePath.match(/\.pug$/)) {
