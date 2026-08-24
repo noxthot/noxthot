@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Dependabot now applies a 3-day cooldown by default; I still suggest 7 · Gregor Ehrensperger</title>
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="../#page-top">← HOME</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="../#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../blog/">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="blog-section bg-light">
+            <div class="container px-4 px-lg-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <a class="blog-post__back" href="./">&larr; Back to all posts</a>
+                        <article class="blog-post">
+                            <header class="blog-post__header mb-4">
+                                <h1 class="blog-post__title">Dependabot now applies a 3-day cooldown by default; I still suggest 7</h1>
+                                <time class="blog-post__date" datetime="2026-08-24">24 August 2026</time>
+                            </header>
+                            <div class="blog-post__body">
+                                <p>
+                                    In
+                                    <a href="./supply-chain-vs-cve-balance.html">an earlier post (May)</a>
+                                    I argued that dependency management is a balancing act between two extremes: update immediately and eat the supply-chain attacks, or never update and eat the publicly known CVEs. My proposed middle ground was a cooldown period before accepting new versions, with 7 days as a gut-feeling sweet spot.
+                                </p>
+                                <p>In July, GitHub shipped exactly that mechanism as a default [1, 2].</p>
+                                <h2>What GitHub did</h2>
+                                <p>
+                                    Dependabot now waits
+                                    <strong>3 days</strong>
+                                    before opening a pull request for a version update. No configuration needed, it is simply the new default. The parts I found most interesting:
+                                </p>
+                                <ul>
+                                    <li>
+                                        <strong>The numbers behind it are alarming.</strong>
+                                        The GitHub Advisory Database published more than 6,500 npm malware advisories in the year up to May 2026, roughly 18 newly catalogued malicious npm packages per day.
+                                    </li>
+                                    <li>
+                                        <strong>Attacks are fast, but so is detection.</strong>
+                                        In a review of 21 supply-chain incidents between 2018 and 2026, the malicious versions were each pulled within hours of publication. One npm attack in 2025 was live for about two hours.
+                                    </li>
+                                    <li>
+                                        <strong>The reasoning for 3 days</strong>
+                                        , quoted from the post:
+                                        <em>“Three days as the default balances two goals: it pushes you past the window where most of these attacks live, and it doesn’t hold your dependencies back longer than necessary.”</em>
+                                    </li>
+                                    <li>
+                                        <strong>They are honest about the limits.</strong>
+                                        A cooldown does little against attacks that play a longer game: backdoors planted in a release and left dormant, maintainer sabotage, or a compromised build system.
+                                    </li>
+                                </ul>
+                                <p>
+                                    You can change the window, or opt out entirely, via the
+                                    <code>cooldown</code>
+                                    option in your
+                                    <code>dependabot.yml</code>
+                                    .
+                                </p>
+                                <h2>So, 3 days or 7?</h2>
+                                <p>The exact number matters far less than the fact that a cooldown now exists for everyone who never touches their config. That single change probably prevents more incidents than any amount of arguing about days.</p>
+                                <p>
+                                    Still, I would stick with 7, and the reason is exactly
+                                    <em>because</em>
+                                    3 is now the default.
+                                </p>
+                                <p>A cooldown does not detect anything by itself. It works because somebody else pulls the poisoned version first, gets burned or gets suspicious, and reports it. Detection is a community effort, and the community needs a steady supply of people standing closer to the fire than you do.</p>
+                                <p>
+                                    With 3 days as the default for a very large population of repositories, that early-warning crowd just got much bigger and much faster. Which means waiting a few extra days on top of the majority is now worth
+                                    <em>more</em>
+                                    than it was before: by day 7, whatever the 3-day crowd tripped over has already been caught, pulled from the registry and written up. The bigger the herd moving at 3 days, the better the herd immunity for anyone at 7.
+                                </p>
+                                <p>Two caveats I should be fair about:</p>
+                                <ol>
+                                    <li>That extra safety is paid for by somebody else’s exposure.</li>
+                                    <li>Four extra days is four extra days of sitting on fixes and features.</li>
+                                </ol>
+                                <p>My recommendation stays: Bump cooldown to 7 days and make sure your CVE handling is fast enough to cover the difference.</p>
+                                <p>Best, Gregor</p>
+                                <p>
+                                    [1]
+                                    <a href="https://github.blog/security/supply-chain-security/the-case-for-a-cooldown-why-dependabot-now-waits-before-issuing-version-updates/">https://github.blog/security/supply-chain-security/the-case-for-a-cooldown-why-dependabot-now-waits-before-issuing-version-updates/</a>
+                                </p>
+                                <p>
+                                    [2]
+                                    <a href="https://github.blog/changelog/2026-07-14-dependabot-version-updates-introduce-default-package-cooldown/">https://github.blog/changelog/2026-07-14-dependabot-version-updates-introduce-default-package-cooldown/</a>
+                                </p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Gregor Ehrensperger &middot; 2026</div></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>
