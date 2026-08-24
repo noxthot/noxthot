@@ -40,7 +40,10 @@ Tell Docker to use a non-conflicting subnet for its default bridge. Edit (or cre
 
 ```json
 {
-    "bip": "172.26.0.1/16"
+    "bip": "172.26.0.1/16",
+    "default-address-pools": [
+        { "base": "172.27.0.0/16", "size": 24 }
+    ]
 }
 ```
 
@@ -52,7 +55,22 @@ sudo systemctl restart docker.service
 
 Pick any private range that does not overlap with networks you commonly use; `172.26.0.0/16` has worked reliably for me on ICE trains so far.
 
-Kudos to [1] for this solution.
+`bip` only moves the default `docker0` bridge.
+Every user-defined network (the ones `docker compose` creates for you) is allocated from `default-address-pools`, which defaults to `172.17.0.0/12` and therefore lands right back in the colliding range.
+That is why the second entry is needed.
+
+Note that the pool's `base` is a *different* `/16` than `bip`, on purpose.
+
+Existing networks keep the subnet they were assigned at creation time, so changing the config is not enough:
+
+```bash
+docker network prune
+```
+
+They get recreated from the new pool on the next `docker compose up`.
+Note that this removes *all* networks not currently used by a container, not just the conflicting ones.
+
+Kudos to [1] for the `bip` solution and to Peter K. for pointing out the part about pruning existing networks.
 
 
 ### Tailscale

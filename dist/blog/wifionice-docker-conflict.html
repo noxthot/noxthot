@@ -98,7 +98,10 @@
                                     :
                                 </p>
                                 <pre><code class="language-json">{
-    &quot;bip&quot;: &quot;172.26.0.1/16&quot;
+    &quot;bip&quot;: &quot;172.26.0.1/16&quot;,
+    &quot;default-address-pools&quot;: [
+        { &quot;base&quot;: &quot;172.27.0.0/16&quot;, &quot;size&quot;: 24 }
+    ]
 }
 </code></pre>
                                 <p>Then restart the daemon:</p>
@@ -109,7 +112,43 @@
                                     <code>172.26.0.0/16</code>
                                     has worked reliably for me on ICE trains so far.
                                 </p>
-                                <p>Kudos to [1] for this solution.</p>
+                                <p>
+                                    <code>bip</code>
+                                    only moves the default
+                                    <code>docker0</code>
+                                    bridge. Every user-defined network (the ones
+                                    <code>docker compose</code>
+                                    creates for you) is allocated from
+                                    <code>default-address-pools</code>
+                                    , which defaults to
+                                    <code>172.17.0.0/12</code>
+                                    and therefore lands right back in the colliding range. That is why the second entry is needed.
+                                </p>
+                                <p>
+                                    Note that the pool’s
+                                    <code>base</code>
+                                    is a
+                                    <em>different</em>
+                                    <code>/16</code>
+                                    than
+                                    <code>bip</code>
+                                    , on purpose.
+                                </p>
+                                <p>Existing networks keep the subnet they were assigned at creation time, so changing the config is not enough:</p>
+                                <pre><code class="language-bash">docker network prune
+</code></pre>
+                                <p>
+                                    They get recreated from the new pool on the next
+                                    <code>docker compose up</code>
+                                    . Note that this removes
+                                    <em>all</em>
+                                    networks not currently used by a container, not just the conflicting ones.
+                                </p>
+                                <p>
+                                    Kudos to [1] for the
+                                    <code>bip</code>
+                                    solution and to Peter K. for pointing out the part about pruning existing networks.
+                                </p>
                                 <h3>Tailscale</h3>
                                 <p>So far, I did not need to use Tailscale on ICE trains, so turning it off temporarily solved it for me:</p>
                                 <pre><code class="language-bash">sudo tailscale down
