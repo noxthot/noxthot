@@ -17,7 +17,8 @@ module.exports = function renderPug(filePath) {
         title: p.title,
         dateIso: p.dateIso,
         dateFormatted: p.dateFormatted,
-        excerpt: p.excerpt
+        excerpt: p.excerpt,
+        categories: p.categories
     }));
 
     console.log(`### INFO: Rendering ${filePath} to ${destPath}`);

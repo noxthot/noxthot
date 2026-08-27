@@ -25,6 +25,9 @@ block content
                                     a.blog-index__link(href=`blog/${post.slug}.html`)
                                         h3.blog-index__post-title= post.title
                                     time.blog-index__date(datetime=post.dateIso)= post.dateFormatted
+                                    p.blog-badges
+                                        each cat in post.categories
+                                            span.blog-badge(class=`blog-badge--${cat.toLowerCase()}`)= cat
                                     if post.excerpt
                                         p.blog-index__excerpt.text-black-50= post.excerpt
                         .text-center.mt-4
@@ -57,7 +60,7 @@ block content
                                 span.has-footnote(title="Publications in the fields of computer vision, explainable AI, machine learning, and extreme value statistics.") researcher,
                             | and
                             u
-                                span.has-footnote(title="Lectures on Software, Programming, Mathematics and Data Science at the University of Innsbruck") lecturer
+                                span.has-footnote(title="Lectures on Software, Programming, Mathematics and Data Science at the University of Innsbruck and on Data Science at the MCI in Innsbruck") lecturer
                             |   with an academic background in mathematics and computer science.
                             br
                             br
@@ -90,7 +93,7 @@ block content
                                     | In 2011 I attended the very first edition of the famous MOOC Artificial Intelligence by Sebastian Thrun and Peter Norvig and was proud to rank among the top 1000 students (160.000 signed up for the course).
                                     | I was immediately captivated by AI related topics and in the following years I took every opportunity to upskill in this field.
                                     | I attended related conferences, took more university and online courses and worked on many Data Science / AI projects professionally.
-                                    | Since 2019, I have been teaching in the Master's programme Data Science at the University of Innsbruck.
+                                    | Since 2019, I have been teaching in the Master's programme Data Science at the University of Innsbruck and since 2025 in the Master's programme Mechantronics at the MCI in Innsbruck.
                                     | Starting in 2021, I began pursuing a PhD in Mathematics at the same university, focusing on explainable artificial intelligence and extreme value statistics.
                                 hr.d-none.d-lg-block.mb-0.ms-0
             // Project Two Row

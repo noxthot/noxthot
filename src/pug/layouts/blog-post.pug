@@ -11,4 +11,7 @@ block content
                         header.blog-post__header.mb-4
                             h1.blog-post__title= title
                             time.blog-post__date(datetime=dateIso)= dateFormatted
+                            p.blog-badges
+                                each cat in categories
+                                    span.blog-badge(class=`blog-badge--${cat.toLowerCase()}`)= cat
                         .blog-post__body!= contentHtml

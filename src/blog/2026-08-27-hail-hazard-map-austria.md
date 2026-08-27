@@ -1,6 +1,7 @@
 ---
 title: "A 1x1 km hail hazard map for Austria from 14 years of observations"
 date: 2026-08-27T10:00:00
+categories: [MATH]
 excerpt: "Our paper on the new Austrian hail hazard map is out. A digest."
 ---
 

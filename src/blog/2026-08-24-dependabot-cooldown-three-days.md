@@ -1,6 +1,7 @@
 ---
 title: "Dependabot now applies a 3-day cooldown by default; I still suggest 7"
 date: 2026-08-24T13:23:00
+categories: [DEV]
 excerpt: "GitHub made a cooldown the default for Dependabot version updates. Their number is 3 days, mine was 7, and I think there is a good reason to stay above the crowd."
 ---
 

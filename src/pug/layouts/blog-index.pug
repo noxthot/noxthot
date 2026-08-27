@@ -8,12 +8,20 @@ block content
                 .col-lg-8
                     h1.blog-section__title.text-uppercase.mb-5 Blog
                     if posts && posts.length
+                        if categories && categories.length
+                            .blog-filter(role='group', aria-label='Filter posts by category')
+                                button.blog-filter__btn.is-active(type='button', data-filter='ALL', aria-pressed='true') ALL
+                                each cat in categories
+                                    button.blog-filter__btn(class=`blog-filter__btn--${cat.toLowerCase()}`, type='button', data-filter=cat, aria-pressed='false')= cat
                         ul.blog-index.list-unstyled
                             each post in posts
-                                li.blog-index__item
+                                li.blog-index__item(data-categories=post.categories.join(' '))
                                     a.blog-index__link(href=`${post.slug}.html`)
                                         h3.blog-index__post-title= post.title
                                     time.blog-index__date(datetime=post.dateIso)= post.dateFormatted
+                                    p.blog-badges
+                                        each cat in post.categories
+                                            span.blog-badge(class=`blog-badge--${cat.toLowerCase()}`)= cat
                                     if post.excerpt
                                         p.blog-index__excerpt.text-black-50= post.excerpt
                     else

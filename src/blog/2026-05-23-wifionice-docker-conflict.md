@@ -1,6 +1,7 @@
 ---
 title: "Getting WifiOnICE (wifi on trains of Deutsche Bahn) to work on Ubuntu"
 date: 2026-05-23T14:00:00
+categories: [DEV, MISC]
 excerpt: "If your Deutsche Bahn ICE wifi is not loading the WifiOnICE connection page, the culprit is most likely an IP range collision."
 ---
 

@@ -22,6 +22,9 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
     year: 'numeric'
 });
 
+// Known post categories, in display order. Posts without a valid one fall back to MISC.
+const CATEGORIES = ['MATH', 'DEV', 'AI', 'MISC'];
+
 function getPosts() {
     if (!sh.test('-d', blogSrc)) {
         return [];
@@ -67,6 +70,7 @@ function renderBlog() {
             title: post.title,
             dateIso: post.dateIso,
             dateFormatted: post.dateFormatted,
+            categories: post.categories,
             contentHtml: post.contentHtml
         });
         fs.writeFileSync(destPath, _prettify(html));
@@ -80,12 +84,14 @@ function renderBlog() {
         baseUrl: '../',
         brand: '← HOME',
         pageTitle: 'Blog · Gregor Ehrensperger',
+        categories: CATEGORIES.filter((c) => posts.some((p) => p.categories.includes(c))),
         posts: posts.map((p) => ({
             slug: p.slug,
             title: p.title,
             dateIso: p.dateIso,
             dateFormatted: p.dateFormatted,
-            excerpt: p.excerpt
+            excerpt: p.excerpt,
+            categories: p.categories
         }))
     });
     const indexDest = upath.join(blogDest, 'index.html');
@@ -128,8 +134,24 @@ function _parsePost(filePath) {
         date: dateValue,
         dateIso: dateValue.toISOString().slice(0, 10),
         dateFormatted: dateFormatter.format(dateValue),
+        categories: _parseCategories(data.categories, filePath),
         contentHtml: md.render(content)
     };
+}
+
+function _parseCategories(value, filePath) {
+    const given = (Array.isArray(value) ? value : [value])
+        .filter(Boolean)
+        .map((c) => String(c).trim().toUpperCase());
+
+    const unknown = given.filter((c) => !CATEGORIES.includes(c));
+    if (unknown.length) {
+        console.warn(`### WARN: ${filePath} — unknown categories ${unknown.join(', ')} (known: ${CATEGORIES.join(', ')})`);
+    }
+
+    // Filtering CATEGORIES also dedupes and puts them in display order.
+    const known = CATEGORIES.filter((c) => given.includes(c));
+    return known.length ? known : ['MISC'];
 }
 
 function _dateFromFilename(fileBase) {

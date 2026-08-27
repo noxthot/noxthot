@@ -1,6 +1,7 @@
 ---
 title: "Hello world"
 date: 2026-05-23
+categories: [MISC]
 excerpt: "First post on the new blog; a short note on what to expect here."
 ---
 
