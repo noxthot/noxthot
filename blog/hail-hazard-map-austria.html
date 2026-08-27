@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>A 1x1 km hail hazard map for Austria from 14 years of observations · Gregor Ehrensperger</title>
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="../#page-top">← HOME</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="../#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../blog/">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="blog-section bg-light">
+            <div class="container px-4 px-lg-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <a class="blog-post__back" href="./">&larr; Back to all posts</a>
+                        <article class="blog-post">
+                            <header class="blog-post__header mb-4">
+                                <h1 class="blog-post__title">A 1x1 km hail hazard map for Austria from 14 years of observations</h1>
+                                <time class="blog-post__date" datetime="2026-08-27">27 August 2026</time>
+                            </header>
+                            <div class="blog-post__body">
+                                <p>
+                                    Our paper
+                                    <em>Building a high-resolution hail database for Austria and estimating hail hazard using a metastatistical approach</em>
+                                    was published in
+                                    <em>Weather and Climate Extremes</em>
+                                    [1], open access. The result is the hail hazard map now published on HORA [2]. This hail hazard map is accessible to everyone without registration.
+                                </p>
+                                <p>This blog article provides an informal (!) digest of the paper’s content and the main results.</p>
+                                <h2>The problem</h2>
+                                <p>
+                                    We want to answer questions like
+                                    <em>how large is the hailstone that a given square kilometre in Austria likely sees once every 10/20/30 years?</em>
+                                </p>
+                                <p>Two things make that hard:</p>
+                                <ol>
+                                    <li>
+                                        <strong>Hail is barely observed.</strong>
+                                        Human reports cluster where people and damageable things are. Radar covers everything but cannot measure hail directly.
+                                    </li>
+                                    <li>
+                                        <strong>The record is short.</strong>
+                                        We have 14 years of 3D radar data (2009–2022) and want up to 30-year return levels. Classical extreme value statistics (block maxima, peak-over-threshold) throw away everything but the extremes, which is exactly what you cannot afford when the extremes are this rare. The usual workaround is to pool events over large regions and give up spatial resolution.
+                                    </li>
+                                </ol>
+                                <p>Previous work solved this by aggregating: 1° × 1° grids (≈ 110 km × 80 km in Central Europe), whole departments in France, grid points with “at least 30 years of data with at least one hail day”. We wanted 1 km × 1 km.</p>
+                                <h2>Part 1: building the database</h2>
+                                <p>Radar gives MESH (maximum estimated size of hail), derived from the vertical reflectivity profile. It is a proxy, and a biased one: C-band radar overestimates hail size.</p>
+                                <p>The pipeline:</p>
+                                <ul>
+                                    <li>
+                                        <strong>Quality-control the radar</strong>
+                                        by requiring an actual detected thunderstorm (radar cell
+                                        <em>plus</em>
+                                        lightning) at the same place and time. Ground clutter and wind turbines do not come with lightning.
+                                    </li>
+                                    <li>
+                                        <strong>Quality-control the reports</strong>
+                                        the same way, keeping only reports within 1 km of a detected thunderstorm outline on that day. ~5000 reports go in, 3943 come out.
+                                    </li>
+                                    <li>
+                                        <strong>Adjust MESH against the reports.</strong>
+                                        MESH is first converted to the largest expected hail size (LEHA) on 100 m² (roughly “what a spotter finds in their garden”), then linearly corrected by a pooled quantile regression:
+                                        <code>size_adjusted = 1.47 · size_LEHA − 3.4</code>
+                                        .
+                                    </li>
+                                    <li>
+                                        <strong>Merge reports back in</strong>
+                                        to cover what radar misses i.e. behind terrain.
+                                    </li>
+                                </ul>
+                                <p>The result is a daily maximum hailstone size per 1 km² cell, 14 years deep. It tracks reports well up to ~5 cm and then flattens out, because the archived radar reflectivity data is capped at 58 dBZ. That cap is a historical artifact of the archive, not of the hardware and hopefully will be lifted in future.</p>
+                                <h2>
+                                    Part 2: using
+                                    <em>all</em>
+                                    the data
+                                </h2>
+                                <p>
+                                    Instead of block maxima we use the metastatistical extreme value distribution (MEVD): model the distribution of
+                                    <strong>ordinary</strong>
+                                    events, treat both the parameters and the number of events per year as random variables, and derive the extremes from that. Every hail day counts, including the 1 mm graupel ones. Literature shows that ordinary events reduce high-quantile uncertainty by up to 50% compared to classical EVT, and the advantage grows exactly when the return period exceeds the record length.
+                                </p>
+                                <p>The ordinary events turn out to be Weibull distributed (shape ≈ 1.14, so nearly exponential but not quite), picked from 25 candidate distributions.</p>
+                                <p>The spatio-temporal variant of the MEVD (STMEVD) lets the Weibull parameters vary smoothly in space and time. A previous study used a Bayesian additive model, which is where it got stuck: interaction terms are expensive, and adding atmospheric covariates was not feasible.</p>
+                                <p>
+                                    So we replaced the regression with a
+                                    <strong>distributional neural network</strong>
+                                    : six dense layers, 20 inputs, two outputs that
+                                    <em>are</em>
+                                    the Weibull scale and shape. Softplus on the output keeps them positive, Swish in the hidden layers keeps everything smooth (the STMEVD derivation wants smooth functions). Loss is the weighted negative log-likelihood of the predicted Weibull given the observed hail sizes. No labels, the network fits a distribution.
+                                </p>
+                                <p>Two things I like about this trade:</p>
+                                <ul>
+                                    <li>Covariates become cheap. CAPE, lightning amplitude, temperature, dew point, humidity, wind, gusts, snowfall border, plus coordinates and date, 20 inputs, and the interactions come for free with a dense net. Data-sparse grid cells borrow strength from similar cells (in a meteorological context) elsewhere.</li>
+                                    <li>Fitting happens across the whole domain at once instead of per grid point, which is implicit knowledge transfer rather than a post-hoc spatial smoother.</li>
+                                </ul>
+                                <h2>The imbalance problem</h2>
+                                <p>
+                                    Big hailstones are rare and imbalanced
+                                    <em>regression</em>
+                                    is a much thinner literature than imbalanced classification.
+                                </p>
+                                <p>One existing recipe to handle this sets weights at three control points (lower fence, median, upper fence of an adjusted boxplot) and interpolates. Applied here it discards half the data and inflates return levels absurdly.</p>
+                                <p>
+                                    Our replacement is simple: put a control point at every percentile of the observed hail size distribution and set the weight to
+                                    <code>percentile / 100</code>
+                                    . Interpolate with PCHIP. The largest hailstones get weight 1, the smallest 0.01, and the curve follows the actual frequency distribution.
+                                </p>
+                                <h2>Results</h2>
+                                <p>50 independently trained networks, ensemble median per grid point, 98% confidence intervals via bootstrap over the ensemble.</p>
+                                <ul>
+                                    <li>
+                                        National median expected hailstone size:
+                                        <strong>3.5 cm</strong>
+                                        at a 10-year return period,
+                                        <strong>4.4 cm</strong>
+                                        at 30 years.
+                                    </li>
+                                    <li>
+                                        In the most hail-prone quarter of the domain, 30-year return levels exceed
+                                        <strong>4.9 cm</strong>
+                                        .
+                                    </li>
+                                    <li>
+                                        About
+                                        <strong>22% of Austria</strong>
+                                        falls into the most severe category (≥ 5 cm) at 30 years.
+                                    </li>
+                                    <li>Uncertainty stays below 0.4 cm for the vast majority of grid points.</li>
+                                    <li>Hotspots: the transition from the Alpine foothills into the Graz Basin, the northern Alpine foreland across southern Germany and Austria, the northern Waldviertel toward the Czech Republic, and the Northern part of the Italian Friuli Venezia Giulia region.</li>
+                                </ul>
+                                <p>
+                                    The orographic signature:
+                                    <strong>small hail is frequent in the Alpine foothills, large hail happens in the adjacent plains.</strong>
+                                    Storms initiate over the foothills and reach full potential once they move out into the unstable, moist air of the flatlands.
+                                </p>
+                                <p>Against a domain-wide null hypothesis of spatially uniform return levels, ~72% of grid cells are significantly distinct (p &lt; 0.05), so the hotspots are structure rather than noise.</p>
+                                <h2>Limitations</h2>
+                                <p>Being honest about the limits is important; here is the short version:</p>
+                                <ul>
+                                    <li>
+                                        The
+                                        <strong>58 dBZ cap</strong>
+                                        means hail above ~5 cm is systematically underestimated. Full-resolution polar volume data and dual-pol would remove it.
+                                    </li>
+                                    <li>
+                                        <strong>14 years</strong>
+                                        is short. Individual severe storms still leave visible footprints in the 30-year return levels; that fades as the record grows. We cap the estimated return period at roughly twice the record length for a reason.
+                                    </li>
+                                    <li>Ground truth is subjective and population-biased.</li>
+                                    <li>The Valluga radar has been out since a lightning strike in 2017, which leaves a hole in western Austria.</li>
+                                </ul>
+                                <p>
+                                    We also ship a
+                                    <strong>confidence rating</strong>
+                                    per grid cell, combining radar geometry (beam height, shading, measurement volume) with data availability (≥ 15 hail days for full credit).
+                                </p>
+                                <p>Code (Julia, Python, R) is MIT on Zenodo, return level maps likewise [3].</p>
+                                <p>Best, Gregor</p>
+                                <p>
+                                    [1]
+                                    <a href="https://doi.org/10.1016/j.wace.2026.100916">https://doi.org/10.1016/j.wace.2026.100916</a>
+                                </p>
+                                <p>
+                                    [2]
+                                    <a href="https://www.hora.gv.at">https://www.hora.gv.at</a>
+                                </p>
+                                <p>
+                                    [3]
+                                    <a href="https://doi.org/10.5281/zenodo.15831488">https://doi.org/10.5281/zenodo.15831488</a>
+                                </p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Gregor Ehrensperger &middot; 2026</div></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>
