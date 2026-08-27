@@ -11239,15 +11239,135 @@ body {
   color: #212529;
 }
 
+.blog-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.blog-filter__btn {
+  background: none;
+  border: 1px solid #ced4da;
+  border-radius: 2rem;
+  padding: 0.25rem 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15rem;
+  color: #495057;
+  cursor: pointer;
+}
+.blog-filter__btn:hover {
+  border-color: #64a19d;
+  color: #64a19d;
+}
+.blog-filter__btn.is-active {
+  background-color: #64a19d;
+  border-color: #64a19d;
+  color: #fff;
+}
+
+.blog-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-badge {
+  border: 1px solid #adb5bd;
+  border-radius: 2rem;
+  padding: 0.1rem 0.6rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.15rem;
+  color: #495057;
+}
+
+.blog-badge--math {
+  border-color: #9558b2;
+  color: #9558b2;
+}
+
+.blog-filter__btn--math {
+  border-color: #9558b2;
+  color: #9558b2;
+}
+.blog-filter__btn--math:hover {
+  border-color: #9558b2;
+  color: #9558b2;
+  background-color: rgba(149, 88, 178, 0.1);
+}
+.blog-filter__btn--math.is-active {
+  background-color: #9558b2;
+  border-color: #9558b2;
+  color: #fff;
+}
+
+.blog-badge--dev {
+  border-color: #389826;
+  color: #389826;
+}
+
+.blog-filter__btn--dev {
+  border-color: #389826;
+  color: #389826;
+}
+.blog-filter__btn--dev:hover {
+  border-color: #389826;
+  color: #389826;
+  background-color: rgba(56, 152, 38, 0.1);
+}
+.blog-filter__btn--dev.is-active {
+  background-color: #389826;
+  border-color: #389826;
+  color: #fff;
+}
+
+.blog-badge--ai {
+  border-color: #cb3c33;
+  color: #cb3c33;
+}
+
+.blog-filter__btn--ai {
+  border-color: #cb3c33;
+  color: #cb3c33;
+}
+.blog-filter__btn--ai:hover {
+  border-color: #cb3c33;
+  color: #cb3c33;
+  background-color: rgba(203, 60, 51, 0.1);
+}
+.blog-filter__btn--ai.is-active {
+  background-color: #cb3c33;
+  border-color: #cb3c33;
+  color: #fff;
+}
+
+.blog-badge--misc {
+  border-color: #4063d8;
+  color: #4063d8;
+}
+
+.blog-filter__btn--misc {
+  border-color: #4063d8;
+  color: #4063d8;
+}
+.blog-filter__btn--misc:hover {
+  border-color: #4063d8;
+  color: #4063d8;
+  background-color: rgba(64, 99, 216, 0.1);
+}
+.blog-filter__btn--misc.is-active {
+  background-color: #4063d8;
+  border-color: #4063d8;
+  color: #fff;
+}
+
 .blog-index {
   margin: 0;
+  border-bottom: 1px solid #dee2e6;
 }
 .blog-index__item {
   padding: 2rem 0;
   border-top: 1px solid #dee2e6;
-}
-.blog-index__item:last-child {
-  border-bottom: 1px solid #dee2e6;
 }
 .blog-index__link {
   color: #212529;

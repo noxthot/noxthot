@@ -38,30 +38,44 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <h1 class="blog-section__title text-uppercase mb-5">Blog</h1>
+                        <div class="blog-filter" role="group" aria-label="Filter posts by category">
+                            <button class="blog-filter__btn is-active" type="button" data-filter="ALL" aria-pressed="true">ALL</button>
+                            <button class="blog-filter__btn blog-filter__btn--math" type="button" data-filter="MATH" aria-pressed="false">MATH</button>
+                            <button class="blog-filter__btn blog-filter__btn--dev" type="button" data-filter="DEV" aria-pressed="false">DEV</button>
+                            <button class="blog-filter__btn blog-filter__btn--misc" type="button" data-filter="MISC" aria-pressed="false">MISC</button>
+                        </div>
                         <ul class="blog-index list-unstyled">
-                            <li class="blog-index__item">
+                            <li class="blog-index__item" data-categories="MATH">
                                 <a class="blog-index__link" href="hail-hazard-map-austria.html"><h3 class="blog-index__post-title">A 1x1 km hail hazard map for Austria from 14 years of observations</h3></a>
                                 <time class="blog-index__date" datetime="2026-08-27">27 August 2026</time>
+                                <p class="blog-badges"><span class="blog-badge blog-badge--math">MATH</span></p>
                                 <p class="blog-index__excerpt text-black-50">Our paper on the new Austrian hail hazard map is out. A digest.</p>
                             </li>
-                            <li class="blog-index__item">
+                            <li class="blog-index__item" data-categories="DEV">
                                 <a class="blog-index__link" href="dependabot-cooldown-three-days.html"><h3 class="blog-index__post-title">Dependabot now applies a 3-day cooldown by default; I still suggest 7</h3></a>
                                 <time class="blog-index__date" datetime="2026-08-24">24 August 2026</time>
+                                <p class="blog-badges"><span class="blog-badge blog-badge--dev">DEV</span></p>
                                 <p class="blog-index__excerpt text-black-50">GitHub made a cooldown the default for Dependabot version updates. Their number is 3 days, mine was 7, and I think there is a good reason to stay above the crowd.</p>
                             </li>
-                            <li class="blog-index__item">
+                            <li class="blog-index__item" data-categories="DEV MISC">
                                 <a class="blog-index__link" href="wifionice-docker-conflict.html"><h3 class="blog-index__post-title">Getting WifiOnICE (wifi on trains of Deutsche Bahn) to work on Ubuntu</h3></a>
                                 <time class="blog-index__date" datetime="2026-05-23">23 May 2026</time>
+                                <p class="blog-badges">
+                                    <span class="blog-badge blog-badge--dev">DEV</span>
+                                    <span class="blog-badge blog-badge--misc">MISC</span>
+                                </p>
                                 <p class="blog-index__excerpt text-black-50">If your Deutsche Bahn ICE wifi is not loading the WifiOnICE connection page, the culprit is most likely an IP range collision.</p>
                             </li>
-                            <li class="blog-index__item">
+                            <li class="blog-index__item" data-categories="DEV">
                                 <a class="blog-index__link" href="supply-chain-vs-cve-balance.html"><h3 class="blog-index__post-title">Finding the balance between minimizing risks for supply-chain attacks and common vulnerabilities and exposures (CVE)</h3></a>
                                 <time class="blog-index__date" datetime="2026-05-23">23 May 2026</time>
+                                <p class="blog-badges"><span class="blog-badge blog-badge--dev">DEV</span></p>
                                 <p class="blog-index__excerpt text-black-50">Some thoughts on the tension between updating dependencies fast enough to dodge known CVEs while still being slow enough to avoid hijacked releases.</p>
                             </li>
-                            <li class="blog-index__item">
+                            <li class="blog-index__item" data-categories="MISC">
                                 <a class="blog-index__link" href="hello-world.html"><h3 class="blog-index__post-title">Hello world</h3></a>
                                 <time class="blog-index__date" datetime="2026-05-23">23 May 2026</time>
+                                <p class="blog-badges"><span class="blog-badge blog-badge--misc">MISC</span></p>
                                 <p class="blog-index__excerpt text-black-50">First post on the new blog; a short note on what to expect here.</p>
                             </li>
                         </ul>
