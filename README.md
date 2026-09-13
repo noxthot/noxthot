@@ -5,18 +5,22 @@
 #### Workshop and course materials
 Here are materials from some workshops and courses I have contributed to:
 
-- [Performance Topics, Parallel and Remote Computing in Julia](https://kandolfp.github.io/ws23_ulg_vu_ama_performance/) - Master of Data Science, Winter term 2023
+- [Industrial Data Science](https://noxthot.github.io/ws26_industrial_datascience_manuscript/) - Master of Mechatronics, Management Center Innsbruck, Winter term 2026
 
-- [Introductionary Data Science with Julia](https://noxthot.github.io/ws22_ulg_ds_julia/) - Master of Data Science, Winter term 2022
+- [Industrial Data Science](https://noxthot.github.io/ws25_industrial_datascience_manuscript/) - Master of Mechatronics, Management Center Innsbruck, Winter term 2025
 
-- [Scientific Coding with Julia](https://noxthot.github.io/ss22_julia_workshop/) - Doctoral College Computational Interdisciplinary Modelling, Summer School 2022
+- [Performance Topics, Parallel and Remote Computing in Julia](https://kandolfp.github.io/ws23_ulg_vu_ama_performance/) - Master of Data Science, University of Innsbruck, Winter term 2023
 
-- [Scientific Coding with Julia](https://discdown.org/fabulousjulia/) - 2022
+- [Introductionary Data Science with Julia](https://noxthot.github.io/ws22_ulg_ds_julia/) - Master of Data Science, University of Innsbruck, Winter term 2022
 
-- [Introductory Python Workshop for Linguists](https://github.com/noxthot/teaching_ss21_python_introduction_linguists) - 2021 - only exercises
+- [Scientific Coding with Julia](https://noxthot.github.io/ss22_julia_workshop/) - Doctoral College Computational Interdisciplinary Modelling, University of Innsbruck, Summer School 2022
+
+- [Scientific Coding with Julia](https://discdown.org/fabulousjulia/) - Master of Data Science, University of Innsbruck, 2022
+
+- [Introductory Python Workshop for Linguists](https://github.com/noxthot/teaching_ss21_python_introduction_linguists) - University of Innsbruck, 2021 - only exercises
 
 #### Publications and preprints with code
-- [From Radar to Risk: Building a High-Resolution Hail Database for Austria And Estimating Risk Through the Integration of Distributional Neural Networks into the Metastatistical Framework](https://doi.org/10.48550/arXiv.2507.06429) - 2025[^1] - [Code](https://github.com/noxthot/hailriskat_paper)
+- [Building a high-resolution hail database for Austria and estimating hail hazard using a metastatistical approach](https://doi.org/10.1016/j.wace.2026.100916) - 2026 - [Code](https://github.com/noxthot/hailriskat_paper)
 
 - [Identifying Lightning Processes in ERA5 Soundings with Deep Learning](https://doi.org/10.5194/gmd-18-1141-2025) - 2025 - [Code](https://github.com/noxthot/xai_lightningprocesses)
 
