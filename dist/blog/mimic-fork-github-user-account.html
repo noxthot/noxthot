@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>How to mimic a fork of your own repository on GitHub (user account) · Gregor Ehrensperger</title>
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="../#page-top">← HOME</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="../#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../blog/">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="blog-section bg-light">
+            <div class="container px-4 px-lg-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <a class="blog-post__back" href="./">&larr; Back to all posts</a>
+                        <article class="blog-post">
+                            <header class="blog-post__header mb-4">
+                                <h1 class="blog-post__title">How to mimic a fork of your own repository on GitHub (user account)</h1>
+                                <time class="blog-post__date" datetime="2026-09-13">13 September 2026</time>
+                                <p class="blog-badges"><span class="blog-badge blog-badge--dev">DEV</span></p>
+                            </header>
+                            <div class="blog-post__body">
+                                <p>
+                                    GitHub does not allow forks of your own repositories when using a
+                                    <strong>personal account</strong>
+                                    (it works fine for enterprise accounts).
+                                </p>
+                                <p>
+                                    If you still want the
+                                    <em>workflow</em>
+                                    of a fork (an independent copy where you experiment freely, while being able to pull in upstream changes) you can get close to that with a simple Git workaround.
+                                </p>
+                                <h2>The workaround</h2>
+                                <h3>1. Clone the original repo into a new directory</h3>
+                                <pre><code class="language-bash">git clone ssh://git@github.com/your-username/original-repo.git my-fork
+cd my-fork
+</code></pre>
+                                <h3>2. Point your remote at your fork (currently empty) repository and push</h3>
+                                <p>
+                                    Create an empty repository on GitHub (do
+                                    <strong>not</strong>
+                                    initialise it with a README or .gitignore), then:
+                                </p>
+                                <pre><code class="language-bash">git remote rename origin upstream
+git remote add origin ssh://git@github.com/your-username/my-fork.git
+git push -u origin main
+</code></pre>
+                                <p>
+                                    You now have an independent copy that lives in your own repo. From now on,
+                                    <code>git push</code>
+                                    only touches
+                                    <strong>your</strong>
+                                    repo and never the original.
+                                </p>
+                                <h2>Get updates from your original repo</h2>
+                                <p>Whenever you want to sync with the original (“upstream”) repository:</p>
+                                <pre><code class="language-bash">git fetch upstream
+git merge upstream/main
+</code></pre>
+                                <p>Or, if you prefer a clean linear history:</p>
+                                <pre><code class="language-bash">git fetch upstream
+git rebase upstream/main
+</code></pre>
+                                <p>This is essentially the same as pulling from the upstream branch; you just fetch first and merge explicitly so that your push target stays separate.</p>
+                                <h2>Cherry-picking changes to your original repo</h2>
+                                <p>To move a specific commit from your fork back into the original repo, cherry-pick from the original repo’s perspective — add your fork as a remote, fetch the commit, cherry-pick it, then push:</p>
+                                <pre><code class="language-bash"># In the original repo (or a clone of it)
+git remote add myfork ssh://git@github.com/your-username/my-fork.git
+git fetch myfork
+git cherry-pick &lt;commit-hash&gt;
+git push origin main
+</code></pre>
+                                <p>This is useful when you only need one commit (not the whole branch history) back in the original repo.</p>
+                                <h2>Pulling changes from your original repo</h2>
+                                <p>To stay up to date with the original repository, fetch and merge (or rebase) from upstream:</p>
+                                <pre><code class="language-bash">git fetch upstream
+git merge upstream/main
+</code></pre>
+                                <p>Or, if you prefer a clean linear history:</p>
+                                <pre><code class="language-bash">git fetch upstream
+git rebase upstream/main
+</code></pre>
+                                <p>Then push the updated branch to your fork:</p>
+                                <pre><code class="language-bash">git push origin main
+</code></pre>
+                                <p>Best, Gregor</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Gregor Ehrensperger &middot; 2026</div></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>
