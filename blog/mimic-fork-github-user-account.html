@@ -88,7 +88,7 @@ git rebase upstream/main
 </code></pre>
                                 <p>This is essentially the same as pulling from the upstream branch; you just fetch first and merge explicitly so that your push target stays separate.</p>
                                 <h2>Cherry-picking changes to your original repo</h2>
-                                <p>To move a specific commit from your fork back into the original repo, cherry-pick from the original repo’s perspective — add your fork as a remote, fetch the commit, cherry-pick it, then push:</p>
+                                <p>To move a specific commit from your fork back into the original repo, cherry-pick from the original repo’s perspective, add your fork as a remote, fetch the commit, cherry-pick it, then push:</p>
                                 <pre><code class="language-bash"># In the original repo (or a clone of it)
 git remote add myfork ssh://git@github.com/your-username/my-fork.git
 git fetch myfork
