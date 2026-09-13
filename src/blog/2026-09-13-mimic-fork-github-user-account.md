@@ -51,7 +51,7 @@ This is essentially the same as pulling from the upstream branch; you just fetch
 
 ## Cherry-picking changes to your original repo
 
-To move a specific commit from your fork back into the original repo, cherry-pick from the original repo's perspective — add your fork as a remote, fetch the commit, cherry-pick it, then push:
+To move a specific commit from your fork back into the original repo, cherry-pick from the original repo's perspective, add your fork as a remote, fetch the commit, cherry-pick it, then push:
 
 ```bash
 # In the original repo (or a clone of it)
