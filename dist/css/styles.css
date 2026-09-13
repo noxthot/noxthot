@@ -11464,3 +11464,39 @@ body {
 .footer {
   padding: 5rem 0;
 }
+
+.publications-section {
+  padding: 10rem 0;
+}
+.publications-section__title {
+  font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  letter-spacing: 0.4rem;
+  color: #212529;
+}
+.publications-section h3, .publications-section .h3 {
+  font-size: 1.25rem;
+  letter-spacing: 0.1rem;
+}
+.publications-section__item {
+  margin-bottom: 2rem;
+}
+.publications-section__link {
+  color: #212529;
+  text-decoration: none;
+  font-weight: bold;
+}
+.publications-section__link:hover {
+  color: #64a19d;
+}
+.publications-section__code-link {
+  display: inline-block;
+  margin-top: 0.25rem;
+}
+.publications-section__workshops {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.publications-section__workshop-item {
+  margin-bottom: 0.75rem;
+}
