@@ -11450,6 +11450,19 @@ body {
   color: inherit;
   padding: 0;
 }
+.blog-post__body table {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  font-size: 0.95em;
+}
+.blog-post__body table th, .blog-post__body table td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #dee2e6;
+  vertical-align: top;
+}
+.blog-post__body table th {
+  background-color: #f8f9fa;
+}
 .blog-post__body blockquote {
   border-left: 0.25rem solid #64a19d;
   padding-left: 1rem;
