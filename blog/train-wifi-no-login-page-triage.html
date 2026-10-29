@@ -49,10 +49,9 @@
                                 </p>
                             </header>
                             <div class="blog-post__body">
+                                <p>The joy of travelling by train and trying to get online.</p>
                                 <p>
-                                    This morning on an ÖBB train: connected to the
-                                    <code>OEBB</code>
-                                    wifi, no login page. Having been bitten before by Docker and Tailscale getting in the way of a train’s network (see the
+                                    Having been bitten before by Docker and Tailscale getting in the way of a train’s network (see the
                                     <a href="./wifionice-docker-conflict.html">WifiOnICE post</a>
                                     ), I went straight into debugging the laptop. Tailscale, DNS overrides, MAC randomisation, wifi power-save, both bands, DHCP timeouts up to 120 seconds. Every attempt looked the same: wifi associated within a second and stayed up, NetworkManager logged
                                     <code>dhcp4: beginning transaction</code>
@@ -64,6 +63,7 @@
                                 <p>Connect to the train’s wifi, then run:</p>
                                 <pre><code class="language-bash">nmcli networking connectivity check; ip -4 route | grep '^default' || echo &quot;NO IP FROM TRAIN&quot;
 </code></pre>
+                                <p>The first half makes NetworkManager run its connectivity probe right now (it fetches a known URL and classifies the reply) and prints the verdict. The second half looks for a default route, which NetworkManager only installs once a DHCP lease has arrived, and prints the marker if there is none.</p>
                                 <p>Read the result top to bottom and stop at the first match:</p>
                                 <table>
                                     <thead>
@@ -181,8 +181,8 @@ ip route get &lt;address from above&gt;   # says &quot;dev wlp0s20f3&quot;?
                                         instead of the train’s server on the wifi link is the same culprit.
                                     </li>
                                 </ul>
-                                <p>If both commands name the wifi interface and the page still does not load, the remaining suspect is a firewall or VPN kill switch dropping everything outside the tunnel. Quit the client, do not just disconnect.</p>
-                                <p>Best, Gregor</p>
+                                <p>If both commands name the wifi interface and the page still does not load, further suspects would be a firewall or VPN kill switch dropping everything outside the tunnel.</p>
+                                <p>Good luck, Gregor</p>
                             </div>
                         </article>
                     </div>
