@@ -5,7 +5,8 @@ categories: [DEV, MISC]
 excerpt: "A two-minute check to decide whether a train's wifi is broken or your laptop is, before you spend half an hour debugging the wrong one."
 ---
 
-This morning on an ÖBB train: connected to the `OEBB` wifi, no login page.
+The joy of travelling by train and trying to get online.
+
 Having been bitten before by Docker and Tailscale getting in the way of a train's network (see the [WifiOnICE post](./wifionice-docker-conflict.html)), I went straight into debugging the laptop.
 Tailscale, DNS overrides, MAC randomisation, wifi power-save, both bands, DHCP timeouts up to 120 seconds.
 Every attempt looked the same: wifi associated within a second and stayed up, NetworkManager logged `dhcp4: beginning transaction`, and then nothing.
@@ -23,6 +24,9 @@ Connect to the train's wifi, then run:
 ```bash
 nmcli networking connectivity check; ip -4 route | grep '^default' || echo "NO IP FROM TRAIN"
 ```
+
+The first half makes NetworkManager run its connectivity probe right now and prints the verdict.
+The second half looks for a default route, which NetworkManager only installs once a DHCP lease has arrived, and prints the marker if there is none.
 
 Read the result top to bottom and stop at the first match:
 

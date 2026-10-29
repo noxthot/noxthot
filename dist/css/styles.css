@@ -11456,11 +11456,14 @@ body {
   font-size: 0.95em;
 }
 .blog-post__body table th, .blog-post__body table td {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #dee2e6;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ced4da;
   vertical-align: top;
 }
 .blog-post__body table th {
+  background-color: #e9ecef;
+}
+.blog-post__body table tbody tr:nth-child(even) {
   background-color: #f8f9fa;
 }
 .blog-post__body blockquote {

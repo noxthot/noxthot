@@ -203,12 +203,16 @@ $category-colors: (
             font-size: 0.95em;
 
             th, td {
-                padding: 0.5rem 0.75rem;
-                border: 1px solid $gray-300;
+                padding: 0.6rem 0.75rem;
+                border: 1px solid $gray-400;
                 vertical-align: top;
             }
 
             th {
+                background-color: $gray-200;
+            }
+
+            tbody tr:nth-child(even) {
                 background-color: $gray-100;
             }
         }
