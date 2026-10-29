@@ -197,6 +197,22 @@ $category-colors: (
             }
         }
 
+        table {
+            width: 100%;
+            margin-bottom: 1.5rem;
+            font-size: 0.95em;
+
+            th, td {
+                padding: 0.5rem 0.75rem;
+                border: 1px solid $gray-300;
+                vertical-align: top;
+            }
+
+            th {
+                background-color: $gray-100;
+            }
+        }
+
         blockquote {
             border-left: 0.25rem solid $primary;
             padding-left: 1rem;

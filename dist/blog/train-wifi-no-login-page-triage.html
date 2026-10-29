@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Train wifi shows no login page: is it the train or is it me? · Gregor Ehrensperger</title>
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="../#page-top">← HOME</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="../#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../#publications">Publications</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../blog/">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="blog-section bg-light">
+            <div class="container px-4 px-lg-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <a class="blog-post__back" href="./">&larr; Back to all posts</a>
+                        <article class="blog-post">
+                            <header class="blog-post__header mb-4">
+                                <h1 class="blog-post__title">Train wifi shows no login page: is it the train or is it me?</h1>
+                                <time class="blog-post__date" datetime="2026-10-29">29 October 2026</time>
+                                <p class="blog-badges">
+                                    <span class="blog-badge blog-badge--dev">DEV</span>
+                                    <span class="blog-badge blog-badge--misc">MISC</span>
+                                </p>
+                            </header>
+                            <div class="blog-post__body">
+                                <p>
+                                    This morning on an ÖBB train: connected to the
+                                    <code>OEBB</code>
+                                    wifi, no login page. Having been bitten before by Docker and Tailscale getting in the way of a train’s network (see the
+                                    <a href="./wifionice-docker-conflict.html">WifiOnICE post</a>
+                                    ), I went straight into debugging the laptop. Tailscale, DNS overrides, MAC randomisation, wifi power-save, both bands, DHCP timeouts up to 120 seconds. Every attempt looked the same: wifi associated within a second and stayed up, NetworkManager logged
+                                    <code>dhcp4: beginning transaction</code>
+                                    , and then nothing.
+                                </p>
+                                <p>Ten minutes later I tried the phone. No login page there either. The train simply never handed out an IP address, and nothing on the laptop could have fixed that.</p>
+                                <p>Lesson: give it a quick sanity check before entering the rabbit hole of debugging.</p>
+                                <h2>The quick check</h2>
+                                <p>Connect to the train’s wifi, then run:</p>
+                                <pre><code class="language-bash">nmcli networking connectivity check; ip -4 route | grep '^default' || echo &quot;NO IP FROM TRAIN&quot;
+</code></pre>
+                                <p>Read the result top to bottom and stop at the first match:</p>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Output</th>
+                                            <th>Meaning</th>
+                                            <th>Do</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>full</code></td>
+                                            <td>already logged in</td>
+                                            <td>nothing</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>portal</code></td>
+                                            <td>train works, the browser just did not get redirected</td>
+                                            <td>
+                                                open
+                                                <a href="http://neverssl.com">http://neverssl.com</a>
+                                                (which should get you redirected) or the operator’s portal, e.g.
+                                                <a href="http://railnet.oebb.at">http://railnet.oebb.at</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <code>limited</code>
+                                                or
+                                                <code>none</code>
+                                                ,
+                                                <strong>with</strong>
+                                                a
+                                                <code>default via ...</code>
+                                                line
+                                            </td>
+                                            <td>you got an IP, but nothing beyond the gateway works</td>
+                                            <td>
+                                                wait 30 s and rerun; still
+                                                <code>limited</code>
+                                                ? something on the laptop is in the way, see below
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <code>limited</code>
+                                                or
+                                                <code>none</code>
+                                                , and
+                                                <code>NO IP FROM TRAIN</code>
+                                            </td>
+                                            <td>DHCP never answered</td>
+                                            <td>check the phone</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p>Still no connection, check the phone to see if the issue is (most likely) with the train network or the laptop.</p>
+                                <h2>
+                                    Got an IP, still
+                                    <code>limited</code>
+                                    : something on the laptop is in the way
+                                </h2>
+                                <p>
+                                    This is where the Docker and Tailscale cases from the
+                                    <a href="./wifionice-docker-conflict.html">WifiOnICE post</a>
+                                    live, together with everything else that touches routing or DNS: VPN clients (WireGuard, OpenVPN, corporate ones), VM and container bridges (
+                                    <code>virbr0</code>
+                                    ,
+                                    <code>vboxnet0</code>
+                                    ,
+                                    <code>lxdbr0</code>
+                                    ), local DNS proxies.
+                                </p>
+                                <p>With a lease, two questions remain: which link answers DNS for the portal, and which interface would packets to that answer leave on?</p>
+                                <pre><code class="language-bash">resolvectl query railnet.oebb.at    # login.wifionice.de on DB trains; ends with &quot;-- link: wlp0s20f3&quot;?
+ip route get &lt;address from above&gt;   # says &quot;dev wlp0s20f3&quot;?
+</code></pre>
+                                <p>
+                                    <code>wlp0s20f3</code>
+                                    is my wifi interface,
+                                    <code>nmcli device status</code>
+                                    lists yours. Both must name the wifi interface. If either names something else (
+                                    <code>tailscale0</code>
+                                    ,
+                                    <code>docker0</code>
+                                    ,
+                                    <code>br-*</code>
+                                    ,
+                                    <code>tun0</code>
+                                    ,
+                                    <code>wg0</code>
+                                    ,
+                                    <code>virbr0</code>
+                                    ), that is the culprit: take it down for the trip (
+                                    <code>sudo tailscale down</code>
+                                    ,
+                                    <code>sudo ip link set docker0 down</code>
+                                    , quit the VPN client, …) and rerun the check. The permanent fixes for Docker and Tailscale are in the older post.
+                                </p>
+                                <p>Two details worth knowing:</p>
+                                <ul>
+                                    <li>
+                                        <code>ip route get</code>
+                                        honours policy routing. That matters for Tailscale, which keeps its routes in a separate table that plain
+                                        <code>ip -4 route</code>
+                                        never shows, so comparing subnets by eye would miss it.
+                                    </li>
+                                    <li>
+                                        If the DNS query fails outright,
+                                        <code>resolvectl status</code>
+                                        shows which link owns the DNS servers. E.g. Tailscale’s
+                                        <code>100.100.100.100</code>
+                                        on
+                                        <code>tailscale0</code>
+                                        instead of the train’s server on the wifi link is the same culprit.
+                                    </li>
+                                </ul>
+                                <p>If both commands name the wifi interface and the page still does not load, the remaining suspect is a firewall or VPN kill switch dropping everything outside the tunnel. Quit the client, do not just disconnect.</p>
+                                <p>Best, Gregor</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Gregor Ehrensperger &middot; 2026</div></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>
