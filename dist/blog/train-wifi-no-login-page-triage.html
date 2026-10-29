@@ -63,7 +63,7 @@
                                 <p>Connect to the train’s wifi, then run:</p>
                                 <pre><code class="language-bash">nmcli networking connectivity check; ip -4 route | grep '^default' || echo &quot;NO IP FROM TRAIN&quot;
 </code></pre>
-                                <p>The first half makes NetworkManager run its connectivity probe right now (it fetches a known URL and classifies the reply) and prints the verdict. The second half looks for a default route, which NetworkManager only installs once a DHCP lease has arrived, and prints the marker if there is none.</p>
+                                <p>The first half makes NetworkManager run its connectivity probe right now and prints the verdict. The second half looks for a default route, which NetworkManager only installs once a DHCP lease has arrived, and prints the marker if there is none.</p>
                                 <p>Read the result top to bottom and stop at the first match:</p>
                                 <table>
                                     <thead>
