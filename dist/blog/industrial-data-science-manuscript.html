@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Industrial Data Science: course manuscript revised and now citable · Gregor Ehrensperger</title>
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="../#page-top">← HOME</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="../#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../#publications">Publications</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../blog/">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="blog-section bg-light">
+            <div class="container px-4 px-lg-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <a class="blog-post__back" href="./">&larr; Back to all posts</a>
+                        <article class="blog-post">
+                            <header class="blog-post__header mb-4">
+                                <h1 class="blog-post__title">Industrial Data Science WS 2025: course manuscript revised and now citable</h1>
+                                <time class="blog-post__date" datetime="2026-11-09">9 November 2026</time>
+                                <p class="blog-badges">
+                                    <span class="blog-badge blog-badge--math">MATH</span>
+                                    <span class="blog-badge blog-badge--ai">AI</span>
+                                </p>
+                            </header>
+                            <div class="blog-post__body">
+                                <p>
+                                    One year ago, I taught
+                                    <em>Industrial Data Science</em>
+                                    in the Master of Mechatronics program at the Management Center Innsbruck (MCI). The manuscript has now been revised (grammar, typos, minor content revisions) and released as v1.0.0 on Zenodo, so it is citable via a DOI [1]. It is freely available online [2] under CC BY-NC-SA 4.0.
+                                </p>
+                                <h2>What is “Industrial Data Science” anyway?</h2>
+                                <p>
+                                    The term is neither widely used nor standardized. Roughly, it means applying data science to industrial settings: process optimization, quality control, predictive maintenance, and similar problems, all fed by large volumes of sensor and process data. The literature more often calls it
+                                    <em>Industrial AI</em>
+                                    . It differs from “regular” AI mostly in its demands: low error tolerance, real-time constraints, heterogeneous data sources, and a very clear expectation of value creation.
+                                </p>
+                                <h2>The idea behind the course</h2>
+                                <p>Most data science courses work with clean, polished datasets. Real machine data is not like that. Sensors fail, buffers overflow, data types change halfway through, and documentation is either missing or wrong.</p>
+                                <p>So the course is built as a slow descent from polished data to raw, live machine data, told in four acts:</p>
+                                <ul>
+                                    <li>
+                                        <strong>Act 1: Polished Machine Data.</strong>
+                                        A warm-up with the synthetic AI4I 2020 predictive maintenance dataset, where we use exploratory data analysis to find out
+                                        <em>when</em>
+                                        a (simplified) milling machine fails.
+                                    </li>
+                                    <li>
+                                        <strong>Act 2: Time Series, a Curated Collection.</strong>
+                                        The toolbox: imputation, decomposition, similarity measures, clustering, classification, and regression on time series, each with runnable notebooks.
+                                    </li>
+                                    <li>
+                                        <strong>Act 3: Real Machine Data.</strong>
+                                        Here we get our hands dirty. Two simulated machines take center stage:
+                                        <ul>
+                                            <li>
+                                                A
+                                                <strong>knife production line</strong>
+                                                whose epoxy application step produces defective handles. Wood is the most expensive part, and the curing oven downstream is energy-intensive, so every defect not caught early is costly. The task is to find the cause in raw sensor data and then tune the machine to reduce defects, first for the night shift and then for the day shift.
+                                            </li>
+                                            <li>
+                                                A
+                                                <strong>pick-and-place machine</strong>
+                                                with placement errors, simulated in real time and exposing its sensors via OPC UA. Students train a model to predict the placement error and close the loop by writing correction values back to the running machine.
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <strong>Act 4: Lost Tapes.</strong>
+                                        An outlook on topics that did not fit into 45 hours: resampling, multimodal learning, and reinforcement learning in industry.
+                                    </li>
+                                </ul>
+                                <p>
+                                    Along the way there are self-study sessions with exercises, from setting up JupyterLab with
+                                    <code>uv</code>
+                                    to wiring a trained model into a live feedback loop. Both machine simulators are open source and run locally, so you do not need a factory to follow along.
+                                </p>
+                                <h2>Who is it for?</h2>
+                                <p>The course was designed as a 3 × 15 hour introduction for mechatronics students with some Python background. It does not try to cover the field in depth (each industrial context has its own data architecture and quirks). It is meant as a hands-on starting point, and I hope it is useful to anyone moving from “data science on Kaggle” to “data science next to a machine”.</p>
+                                <h2>What comes next</h2>
+                                <p>
+                                    I am teaching the course again right now, and I am using this run to restructure and revamp the content. The finalized manuscript of this year’s edition will be shared once the course has ended. Until then,
+                                    <code>v1.0.0</code>
+                                    remains the citable reference for the 2025 edition.
+                                </p>
+                                <p>If you use the material, please cite it via the DOI [1]. Feedback, corrections, and issues are always welcome on GitHub [3].</p>
+                                <p>Best, Gregor</p>
+                                <p>
+                                    [1] Ehrensperger, G. (2026).
+                                    <em>Industrial Data Science Course Material (2025)</em>
+                                    (v1.0.0). Zenodo.
+                                    <a href="https://doi.org/10.5281/zenodo.24092549">https://doi.org/10.5281/zenodo.24092549</a>
+                                </p>
+                                <p>
+                                    [2]
+                                    <a href="https://noxthot.github.io/ws25_industrial_datascience_manuscript/">https://noxthot.github.io/ws25_industrial_datascience_manuscript/</a>
+                                </p>
+                                <p>
+                                    [3]
+                                    <a href="https://github.com/noxthot/ws25_industrial_datascience_manuscript">https://github.com/noxthot/ws25_industrial_datascience_manuscript</a>
+                                </p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Gregor Ehrensperger &middot; 2026</div></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>
