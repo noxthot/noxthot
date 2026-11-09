@@ -6,8 +6,8 @@ excerpt: "One year after teaching Industrial Data Science at MCI, the revised ma
 ---
 
 One year ago, I taught *Industrial Data Science* in the Master of Mechatronics program at the Management Center Innsbruck (MCI).
-The manuscript has now been revised (grammar, typos, minor content revisions) and released as v1.0.0 on Zenodo, so it is citable via a DOI [1].
-It is freely available online [2] under CC BY-NC-SA 4.0.
+The manuscript has now been revised (grammar, typos, minor content revisions) and released as v1.0.0 on Zenodo, so it is citable via a [DOI](https://doi.org/10.5281/zenodo.24092549).
+It is [freely available online](https://noxthot.github.io/ws25_industrial_datascience_manuscript/) under CC BY-NC-SA 4.0.
 
 ## What is "Industrial Data Science" anyway?
 
@@ -46,15 +46,8 @@ I am teaching the course again right now, and I am using this run to restructure
 The finalized manuscript of this year's edition will be shared once the course has ended.
 Until then, `v1.0.0` remains the citable reference for the 2025 edition.
 
-If you use the material, please cite it via the DOI [1].
-Feedback, corrections, and issues are always welcome on GitHub [3].
+If you use the material, please cite it via the [DOI](https://doi.org/10.5281/zenodo.24092549).
+Feedback, corrections, and issues are always welcome on [GitHub](https://github.com/noxthot/ws25_industrial_datascience_manuscript).
 
 Best,
 Gregor
-
-
-[1] Ehrensperger, G. (2026). *Industrial Data Science Course Material (2025)* (v1.0.0). Zenodo. <https://doi.org/10.5281/zenodo.24092549>
-
-[2] <https://noxthot.github.io/ws25_industrial_datascience_manuscript/>
-
-[3] <https://github.com/noxthot/ws25_industrial_datascience_manuscript>
